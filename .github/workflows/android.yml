@@ -20,7 +20,7 @@ jobs:
       - name: ZIP dosyasını aç
         run: unzip -q CEYL_EVRENE_SOR_Sifirdan_Android_Proje.zip -d proje
 
-            - name: Proje klasörünü bul
+      - name: Proje klasörünü bul
         run: |
           PROJECT_DIR=$(dirname "$(find proje -name settings.gradle -o -name settings.gradle.kts | head -n 1)")
           echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"

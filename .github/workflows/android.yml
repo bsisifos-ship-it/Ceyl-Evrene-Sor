@@ -20,28 +20,21 @@ jobs:
       - name: ZIP dosyasını aç
         run: unzip -q CEYL_EVRENE_SOR_Sifirdan_Android_Proje.zip -d proje
 
+      - name: Java hedefini 17 yap
+        working-directory: proje
+        run: sed -i 's/JavaVersion.VERSION_1_8/JavaVersion.VERSION_17/g' app/build.gradle
+
       - name: Gradle kurulumu
         uses: gradle/actions/setup-gradle@v6
         with:
           gradle-version: '8.11.1'
 
-      - name: Java hedefini 17 yap
-  run: |
-    cat > /tmp/fix.gradle <<'EOF'
-    allprojects {
-      tasks.withType(JavaCompile).configureEach {
-        sourceCompatibility = JavaVersion.VERSION_17.toString()
-        targetCompatibility = JavaVersion.VERSION_17.toString()
-      }
-    }
-    EOF
-
-- name: Android APK oluştur
-  working-directory: proje
-  run: gradle --init-script /tmp/fix.gradle assembleDebug --no-daemon
+      - name: Android APK oluştur
+        working-directory: proje
+        run: gradle assembleDebug --no-daemon
 
       - name: APK dosyasını sakla
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: Ceyl-Evrene-Sor-APK
           path: proje/app/build/outputs/apk/debug/app-debug.apk

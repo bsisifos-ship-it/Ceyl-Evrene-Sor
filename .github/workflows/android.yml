@@ -27,7 +27,7 @@ jobs:
 
       - name: Java hedefini 17 yap
         run: |
-          sed -i 's/JavaVersion.VERSION_1_8/JavaVersion.VERSION_17/g' "$PROJECT_DIR/app/build.gradle"
+          find proje -type f \( -name "*.gradle" -o -name "*.gradle.kts" \) -print0 | xargs -0 sed -i 's/JavaVersion.VERSION_1_8/JavaVersion.VERSION_17/g'
 
       - name: Gradle kurulumu
         uses: gradle/actions/setup-gradle@v6

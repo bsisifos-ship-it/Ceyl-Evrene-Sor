@@ -9,10 +9,10 @@ jobs:
 
     steps:
       - name: Projeyi indir
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Java 17 kur
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
@@ -21,7 +21,7 @@ jobs:
         run: unzip -q CEYL_EVRENE_SOR_Sifirdan_Android_Proje.zip -d proje
 
       - name: Gradle kurulumu
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
         with:
           gradle-version: '8.11.1'
 
@@ -30,7 +30,7 @@ jobs:
         run: gradle assembleDebug --no-daemon
 
       - name: APK dosyasını sakla
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Ceyl-Evrene-Sor-APK
           path: proje/app/build/outputs/apk/debug/app-debug.apk
